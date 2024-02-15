@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<data>
+        <register name="ADC Registers">
+            <addr>title</addr>
+        </register>
+        <register name="ADC Status">
+            <addr>0x43c00000</addr>
+        </register>
+        <register name="ADC IE">
+            <addr>0x43c00004</addr>
+        </register>
+        <register name="ADC IS">
+            <addr>0x43c00008</addr>
+        </register>
+        <register name="ADC IS1">
+            <addr>0x43c00320</addr>
+        </register>
+        <register name="DMA Status">
+            <addr>0x43C00340</addr>
+        </register>
+        <register name="DMA Register">
+            <addr>0x40400004</addr>
+        </register>
+        <register name="DMA Register">
+            <addr>0x40400008</addr>
+        </register>
+</data>
+

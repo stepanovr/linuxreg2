@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<data>
+        <register name="ADC">
+            <addr>title</addr>
+        </register>
+        <register name="ADC1">
+            <addr>0x43c00320</addr>
+        </register>
+        <register name="ADC2">
+            <addr>0x43c00330</addr>
+        </register>
+        <register name="ADC3">
+            <addr>0x43c00008</addr>
+        </register>
+        <register name="ADC4">
+            <addr>0x43c003a0</addr>
+        </register>
+        <register name="ADC5">
+            <addr>0x43c00388</addr>
+        </register>
+        <register name="ADC2">
+            <addr>0x43c00304</addr>
+        </register>
+        <register name="ADC3">
+            <addr>0x43c003b0</addr>
+        </register>
+        <register name="ADC4">
+            <addr>0x43c00384</addr>
+        </register>
+</data>
+
