@@ -16,5 +16,5 @@ sudo ./mem_access.sh
 
 On a remote machine run the Python application gui_access_udp.py
 
-Set the target machine's IP adres to the corresponding entry field.
+Set the target machine's IP address to the corresponding entry field.
 
