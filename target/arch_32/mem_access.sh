@@ -10,22 +10,12 @@ FIFO_LOCATION=/tmp
 
 WORK_DIR=`pwd`
 
-#[ -p "${FIFO_LOCATION}/$PIPE_DOWN" ] && rm  "${FIFO_LOCATION}/$PIPE_DOWN"
-
-#[ -p "${FIFO_LOCATION}/$PIPE_UP" ] && rm  "${FIFO_LOCATION}/$PIPE_UP"
-
-
-#mkfifo  "${FIFO_LOCATION}/$PIPE_DOWN"
-#mkfifo  "${FIFO_LOCATION}/$PIPE_UP"
-#chmod 666 "${FIFO_LOCATION}/$PIPE_DOWN"
-#chmod 666 "${FIFO_LOCATION}/$PIPE_UP"
-
 
 killall udpserv
 
 
 ${WORK_DIR}/udpserv $PORT ${FIFO_LOCATION}/$PIPE_DOWN ${FIFO_LOCATION}/$PIPE_UP &
-#exit 0
+exit 0
 
 while [ true ]
 do
@@ -40,7 +30,5 @@ echo " ${FIFO_LOCATION}/$PIPE_UP"
 echo "$MESSAGE $MESSAGE1"
 
 done
-#ls -l ${FIFO_LOCATION}/$PIPE_UP
-#ls -l ${FIFO_LOCATION}/$PIPE_DOWN
 
 
