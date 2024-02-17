@@ -31,36 +31,10 @@ The File menu:
   That allows access to a custom register group.
   See *.xml files presented for a refernce
 
-The xml file example:
 
+Open registers.xml file that is an example 
 
-<?xml version="1.0"?>
-<data>
-        <register name="ADC Registers">
-            <addr>title</addr>
-        </register>
-        <register name="ADC Status">
-            <addr>0x43c00000</addr>
-        </register>
-        <register name="ADC IE">
-            <addr>0x43c00004</addr>
-        </register>
-        <register name="ADC IS">
-            <addr>0x43c00008</addr>
-        </register>
-        <register name="ADC IS1">
-            <addr>0x43c00320</addr>
-        </register>
-        <register name="DMA Status">
-            <addr>0x43C00340</addr>
-        </register>
-        <register name="DMA Register">
-            <addr>0x40400004</addr>
-        </register>
-        <register name="DMA Register">
-            <addr>0x40400008</addr>
-        </register>
-</data>
+The first register name is "ADC Regssters" that is the name of the window to be opened
+All "register name" fields after the first appearance are used for naming registers 
+with the address indicated with the "addr" field
 
-ADC Registers -- name of the window
-All "register name" fields after the first appearance are used for naming registers with the address indicated with the "addr" field
