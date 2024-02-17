@@ -8,6 +8,8 @@ Writing to some registers of some deviced i.e. PMIC may damage your hardware.
 Do not try access the devices that are unknown to you
 Use the application on your own risk.
 
+Use 32 bit writing only.
+
 32 bit architecture:
 Copy files in target/arch32 to a target machine.
 Execute  make
@@ -18,3 +20,47 @@ On a remote machine run the Python application gui_access_udp.py
 
 Set the target machine's IP address to the corresponding entry field.
 
+The File menu:
+* Allows turning logging on and off
+
+* Option "Script" opens a script file that contails the sequence of reading and writing commands.
+  See the "program" file as an example. That file has a list of read commands. 
+  Adding a value at the end of a read commands converts it to a write command writing the aded walue
+
+* Option "Regs XML" opens an *.xml file that contains register set to open im a new dialog window.
+  That allows access to a custom register group.
+  See *.xml files presented for a refernce
+
+The xml file example:
+
+
+<?xml version="1.0"?>
+<data>
+        <register name="ADC Registers">
+            <addr>title</addr>
+        </register>
+        <register name="ADC Status">
+            <addr>0x43c00000</addr>
+        </register>
+        <register name="ADC IE">
+            <addr>0x43c00004</addr>
+        </register>
+        <register name="ADC IS">
+            <addr>0x43c00008</addr>
+        </register>
+        <register name="ADC IS1">
+            <addr>0x43c00320</addr>
+        </register>
+        <register name="DMA Status">
+            <addr>0x43C00340</addr>
+        </register>
+        <register name="DMA Register">
+            <addr>0x40400004</addr>
+        </register>
+        <register name="DMA Register">
+            <addr>0x40400008</addr>
+        </register>
+</data>
+
+ADC Registers -- name of the window
+All "register name" fields after the first appearance are used for naming registers with the address indicated with the "addr" field
