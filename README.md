@@ -27,7 +27,7 @@ The File menu:
 
 * Option "Script" opens a script file that contains the sequence of reading and writing commands.
   See the "program" file as an example. That file has a list of read commands. 
-  Adding a value at the end of a read commands converts it to a write command writing the added walue.
+  Adding a value at the end of a read commands converts it to a write command writing the added value.
 
 * Option "Regs XML" opens an *.xml file that contains register set to open im a new dialog window.
   That allows access to a custom register group.
