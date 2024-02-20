@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <sys/io.h>
+//#include <sys/io.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -13,14 +13,13 @@
 
 
 
-char* mem_access(void* p_addr, uint64_t value, int bits, int read);
-
-
 //To check execute in bash: "getconf PAGESIZE"
 #define MAP_PAGESIZE 4096UL
 
 #define RESULT_LEN 30
 char result[RESULT_LEN];
+
+char* mem_access(void* p_addr, uint64_t value, int bits, int read);
 
 void read8(void* v_addr, char* result)
 {
@@ -76,7 +75,7 @@ char* mem_access(void* p_addr, uint64_t value, int bits, int read)
 
   if((fd = open("/dev/mem", O_RDWR | O_SYNC)) < 0)\
   {
-    printf("failed to open /dev/mem\n");
+    perror("failed to open /dev/mem\n");
     exit(-1);
   }
 
@@ -85,8 +84,8 @@ char* mem_access(void* p_addr, uint64_t value, int bits, int read)
 
   if((pMem == MAP_FAILED) || (pMem == NULL))
   {
-    perror("failed to map /dev/mem");
-    exit(-1);
+    perror("failed to map /dev/mem\n");
+    return "bad address";
   }
 
   v_addr = pMem + offset;

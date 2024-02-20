@@ -1,7 +1,8 @@
 # linuxreg2
 Next generation of the linuxreg. Allows direct memory/device registers access from the userspace.
 
-The application supports 32 bit systems only. Extention to 64 bit is pending.
+The application supports 32 bit and 64 bit architectures.
+Select appropriate directory in the target subdirectory.
 
 Warning! Reading of some registers may crash you system.
 Writing to some registers of some deviced i.e. PMIC may damage your hardware.
@@ -39,5 +40,5 @@ All "register name" fields after the first appearance are used for naming regist
 with the address indicated with the "addr" field.
 
 Try oppening the registers.xml file with the application's File->Regs XML.
-That will open the window that is specivied with the registers.xml.
+That will open the window that is specified with the registers.xml.
 

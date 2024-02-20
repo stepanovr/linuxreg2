@@ -35,14 +35,20 @@ int main(int argc, char **argv) {
   int n; /* message byte size */
   char *token;
   int param_idx;
-  uint32_t params[PARAM_NUM];
+  uint64_t params[PARAM_NUM];
+
+  if (geteuid() != 0)
+    {
+      printf("\n\nSuperuser access rights are required!!!\n\n\n\n");
+      exit(-1);
+    }
 
   /*
    * check command line arguments
    */
   if (argc != 4) {
     fprintf(stderr, "usage: %s <port> <pipe_down> <pipe_up>\n", argv[0]);
-    exit(1);
+    exit(-1);
   }
   portno = atoi(argv[1]);
 
