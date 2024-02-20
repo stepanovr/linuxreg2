@@ -1,8 +1,8 @@
 # linuxreg2
 Next generation of the linuxreg. Allows direct memory/device registers access from the userspace.
 
-The application supports 32 bit and 64 bit architectures.
-Select appropriate directory in the target subdirectory.
+The application supports 32 bit and 64 bit target architectures.
+To choose the target architecture select an appropriate directory in the target subdirectory.
 
 Warning! Reading of some registers may crash you system.
 Writing to some registers of some deviced i.e. PMIC may damage your hardware.
@@ -19,14 +19,15 @@ sudo ./mem_access.sh
 
 On a remote machine run the Python application gui_access_udp.py
 
-Set the target machine's IP address to the corresponding entry field.
+Set the target machine's IP address to the corresponding entry field in the dialog window.
+The default port is 35035.
 
 The File menu:
 * Allows turning logging on and off
 
-* Option "Script" opens a script file that contails the sequence of reading and writing commands.
+* Option "Script" opens a script file that contains the sequence of reading and writing commands.
   See the "program" file as an example. That file has a list of read commands. 
-  Adding a value at the end of a read commands converts it to a write command writing the aded walue.
+  Adding a value at the end of a read commands converts it to a write command writing the added walue.
 
 * Option "Regs XML" opens an *.xml file that contains register set to open im a new dialog window.
   That allows access to a custom register group.
