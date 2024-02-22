@@ -9,13 +9,42 @@ Writing to some registers of some deviced i.e. PMIC may damage your hardware.
 Do not try access the devices that are unknown to you. 
 Use the application on your own risk.
 
-Use 32 bit writing only.
+The application consists of two parts:
+The first one is a simple udp server to run on the target machine. The UDP server receives command from 
+the remote GUI application, execute them and responds to the remote GUI application.
+There are two versions of the server in the target directory: target/arch_32 and target/arch_64.
 
-32 bit architecture:
-Copy files in target/arch32 to a target machine.
+The second part is a Python scripts that uses tkinter for GUI.
+
+To install tkinter use
+Ubuntu
+sudo apt-get install python3-tk 
+
+Fedora
+sudo dnf install python3-tkinter
+
+MacOS
+brew install python-tk
+
+On Windows firewall doesn't support rfc4787 (Network Address Translation (NAT) Behavioral Requirements
+for Unicast UDP). That may be fixed with a rule creation or firewall disabling.
+
+
+For writing use 32 bit words only.
+
+
+Installing the target udp server on the 32 bit architecture:
+Copy files in target/arch_32 to a target machine.
 Execute  make
+
+Installing the target udp server on the 64 bit architecture:
+Copy files in target/arch_64 to a target machine.
+Execute  make
+
+
 Then execute the script as superuser:
 sudo ./mem_access.sh
+
 
 On a remote machine run the Python application gui_access_udp.py
 
