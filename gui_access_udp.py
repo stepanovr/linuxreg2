@@ -10,6 +10,8 @@ from tkinter import ttk
 
 from tkinter import filedialog
 
+import yaml
+
 class Window(tk.Toplevel):
     config_data = []
 
@@ -204,6 +206,37 @@ class Window(tk.Toplevel):
 
       data = app.udp_exchange(request)
       print (data)
+
+class State_mach:
+  def state_mach_init(self, filename):
+    with open(filename, 'r') as file:
+       machine = yaml.safe_load(file)
+
+#    print(machine)
+
+    states_n = machine['machine']['states_n']
+    events_n = machine['machine']['events_n']
+    print(states_n)
+    print(events_n)
+
+
+    states = machine['machine']['states']
+
+    for i in range(0,int(states_n)):
+      print(states[i])
+
+#    print(type(states[2]))
+    print("----------------")
+    actions = machine['machine']['actions']
+    for i in range(0,int(states_n)):
+      print(actions[i])
+
+#    print(actions[2])
+
+    events = machine['machine']['events']
+
+    print(events[0])
+    print(events[1])
 
 
 class Application(Frame):
@@ -536,6 +569,12 @@ class Application(Frame):
       print(line + " " + data)
 
 
+  def run_st_mach(self):
+    st_mach = State_mach();
+    filename = filedialog.askopenfilename()
+    
+    st_mach.state_mach_init(filename);
+    print("run_st_mach")
 
   def run_xml(self):
 #    print("Use XML registers set")
@@ -609,6 +648,13 @@ file_menu.add_command(
     label='Regs XML',
     command=app.run_xml
 )
+
+# add a menu items to the menu
+file_menu.add_command(
+    label='State Machine',
+    command=app.run_st_mach
+)
+
 
 # add a menu items to the menu
 file_menu.add_command(
