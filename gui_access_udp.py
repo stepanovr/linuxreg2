@@ -239,7 +239,7 @@ class Application(Frame):
     self.serv_addr_ent = Entry(self)
     self.serv_addr_ent.grid(row = 1, column = 1, sticky = W)
     self.serv_addr_ent.delete(0,END)
-    self.serv_addr_ent.insert(0, "192.168.1.157" )
+    self.serv_addr_ent.insert(0, "192.168.1.8" )
     Label(self,
       text = "Port:"
       ).grid(row = 2, column = 0, sticky = W)
@@ -461,6 +461,8 @@ class Application(Frame):
     bits = self.bits.get()
     bits = self.set_format(bits)
 
+    self.udp_socket.settimeout(2.0)
+
     for ii in range(self.num_per_line * lines_num):
       if (ii % self.num_per_line) == 0:
         out_string += "\n" + hex(addr) + ": "
@@ -472,7 +474,7 @@ class Application(Frame):
 
       bytesToSend = str.encode(request)
       self.udp_socket.sendto(bytesToSend, self.serverAddressPort)
-      self.udp_socket.settimeout(2.0)
+#      self.udp_socket.settimeout(2.0)
 
       try:
         data, addr_udp = self.udp_socket.recvfrom(1024)
