@@ -238,6 +238,13 @@ class State_mach:
     print(events[0])
     print(events[1])
 
+    action = machine['machine']['action']
+
+    print(action)
+    print(action["a0"])
+    print(action["a1"])
+    print(action["a2"])
+
 
 class Application(Frame):
   """ GUI application for access the remote memory access application over TCP  """
