@@ -12,6 +12,7 @@
 #define PARAM_NUM 4
 
 char* mem_access(void* p_addr, uint64_t value, int bits, int read);
+void config_st_machine(char* line);
 
 /*
  * error - wrapper for perror
@@ -22,7 +23,8 @@ void error(char *msg) {
 }
 
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
   int sockfd; /* socket */
   int portno; /* port to listen on */
   int clientlen; /* byte size of client's address */
@@ -104,7 +106,13 @@ int main(int argc, char **argv) {
     hostaddrp = inet_ntoa(clientaddr.sin_addr);
     if (hostaddrp == NULL)
       error("ERROR on inet_ntoa\n");
-    printf("%s ", buf);
+    printf("%s\n", buf);
+    if((buf[0] == 's') || (buf[0] == 'S'))
+    {
+	//State machine configure
+	config_st_machine(buf);
+        continue;
+    }
 
     token = strtok(buf, " ");
     param_idx = 0;

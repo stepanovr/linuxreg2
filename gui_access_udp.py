@@ -208,11 +208,16 @@ class Window(tk.Toplevel):
       print (data)
 
 class State_mach:
+
+  def print_list(self, lst):
+    num = len(lst)
+    print("=====")
+    for i in range(0, num):
+      print(lst[i])
+
   def state_mach_init(self, filename):
     with open(filename, 'r') as file:
        machine = yaml.safe_load(file)
-
-#    print(machine)
 
     states_n = machine['machine']['states_n']
     events_n = machine['machine']['events_n']
@@ -225,13 +230,11 @@ class State_mach:
     for i in range(0,int(states_n)):
       print(states[i])
 
-#    print(type(states[2]))
     print("----------------")
     actions = machine['machine']['actions']
     for i in range(0,int(states_n)):
       print(actions[i])
 
-#    print(actions[2])
 
     events = machine['machine']['events']
 
@@ -240,10 +243,18 @@ class State_mach:
 
     action = machine['machine']['action']
 
-    print(action)
-    print(action["a0"])
-    print(action["a1"])
-    print(action["a2"])
+#    print(action["a0"])
+#    print(len(action["a0"]))
+
+    self.print_list(action["a0"])
+    self.print_list(action["a1"])
+    self.print_list(action["a2"])
+
+
+
+#    a_string = ' '.join(action["a0"])
+#    print(a_string)
+
 
 
 class Application(Frame):
@@ -581,7 +592,6 @@ class Application(Frame):
     filename = filedialog.askopenfilename()
     
     st_mach.state_mach_init(filename);
-    print("run_st_mach")
 
   def run_xml(self):
 #    print("Use XML registers set")
@@ -591,17 +601,8 @@ class Application(Frame):
     regs = self.parse_reg_xml(filename)
     open_window = Window(self, regs)
 
-#    with open(filename) as f:
-#      lines = [line.rstrip() for line in f]
-#    for line in lines:
-#      data = self.udp_exchange(line)
-#      data = data.strip("\n")
-
-#      print(line + " " + data)
-
   def parse_reg_xml(self, finame):
     self.regs=[]
-#    print("+++++++++++")
     tree = ET.parse(finame)
 
     root = tree.getroot()
@@ -614,8 +615,6 @@ class Application(Frame):
       reg.append(addr)
       self.regs.append(reg)
 
-#    for register in self.regs:
-#      print(register[0], register[1])
     return self.regs
 
 

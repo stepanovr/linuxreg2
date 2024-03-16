@@ -150,3 +150,9 @@ char* mem_access(void* p_addr, uint64_t value, int bits, int read)
   return result;
 }
 
+void config_st_machine(char* line)
+{
+  printf("%s  %s\n", __func__, line);
+}
+
+
