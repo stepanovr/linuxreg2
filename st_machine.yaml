@@ -44,4 +44,42 @@ machine:
              mov1 a0x32000004 0,
              mov1 a0x32000008 i0xFF]
 
+        a3: [ nop ]
+
+        a4: [ nop ]
+
+        a5: [ nop ]
+
+        a6: [ nop ]
+
+        a7: [ nop ]
+
+        a8: [ nop ]
+
+        a9: [ nop ]
+
+        a10: [ nop ]
+
+        a11: [ nop ]
+
+        a12: [ nop ]
+
+        a13: [ nop ]
+
+        a14: [ nop ]
+
+        a15: [ nop ]
+
+        a16: [ nop ]
+
+        a17: [ nop ]
+
+        a18: [ nop ]
+
+        a19: [ nop ]
+
+        a20: [ nop ]
+
+
+
 

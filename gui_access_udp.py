@@ -12,6 +12,8 @@ from tkinter import filedialog
 
 import yaml
 
+g_serverAddressPort = ("localhost", 10000)
+
 class Window(tk.Toplevel):
     config_data = []
 
@@ -210,12 +212,27 @@ class Window(tk.Toplevel):
 class State_mach:
 
   def print_list(self, lst):
+
     num = len(lst)
-    print("=====")
+#    print("=====")
     for i in range(0, num):
       print(lst[i])
 
+  def send_action(self, actn, action):
+    print(actn)
+    bytesToSend = str.encode("s" + actn)
+    self.udp_socket.sendto(bytesToSend, g_serverAddressPort)
+
+    self.print_list(action[actn])
+    for act in action[actn]:
+      request = "s " + act
+      bytesToSend = str.encode(request)
+      self.udp_socket.sendto(bytesToSend, g_serverAddressPort)
+
   def state_mach_init(self, filename):
+    global g_serverAddressPort
+    self.udp_socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
+
     with open(filename, 'r') as file:
        machine = yaml.safe_load(file)
 
@@ -246,11 +263,44 @@ class State_mach:
 #    print(action["a0"])
 #    print(len(action["a0"]))
 
-    self.print_list(action["a0"])
-    self.print_list(action["a1"])
-    self.print_list(action["a2"])
-
-
+    self.send_action("a0", action)
+    self.send_action("a1", action)
+    self.send_action("a2", action)
+    self.send_action("a3", action)
+    self.send_action("a4", action)
+    self.send_action("a5", action)
+    self.send_action("a6", action)
+    self.send_action("a7", action)
+    self.send_action("a8", action)
+    self.send_action("a9", action)
+    self.send_action("a10", action)
+    self.send_action("a11", action)
+    self.send_action("a12", action)
+    
+#    self.print_list(action["a0"])
+#    for act in action["a0"]:
+#      request = "s " + act
+#      bytesToSend = str.encode(request)
+#      self.udp_socket.sendto(bytesToSend, g_serverAddressPort)
+      
+#    self.print_list(action["a1"])
+#    for act in action["a1"]:
+#      request = "s " + act
+#      bytesToSend = str.encode(request)
+#      self.udp_socket.sendto(bytesToSend, g_serverAddressPort)
+      
+#    self.print_list(action["a2"])
+#    for act in action["a2"]:
+#      request = "s " + act
+#      bytesToSend = str.encode(request)
+#      self.udp_socket.sendto(bytesToSend, g_serverAddressPort)
+      
+#    self.print_list(action["a20"])
+#    for act in action["a20"]:
+#      request = "s " + act
+#      bytesToSend = str.encode(request)
+#      self.udp_socket.sendto(bytesToSend, g_serverAddressPort)
+      
 
 #    a_string = ' '.join(action["a0"])
 #    print(a_string)
@@ -360,9 +410,12 @@ class Application(Frame):
       row += 1
 
   def udp_exchange(self, request):
+    global g_serverAddressPort
+
     self.serv_addr = self.serv_addr_ent.get()
     self.serv_port = self.serv_port_ent.get()
     self.serverAddressPort = (self.serv_addr, int(self.serv_port))
+    g_serverAddressPort = self.serverAddressPort;
     self.udp_socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 
     bytesToSend = str.encode(request)
@@ -469,6 +522,8 @@ class Application(Frame):
       quit()
 
   def open_connection_UDP(self):
+    global g_serverAddressPort
+
     self.serv_addr = self.serv_addr_ent.get()
     self.serv_port = self.serv_port_ent.get()
     self.serverAddressPort = (self.serv_addr, int(self.serv_port))
@@ -480,7 +535,8 @@ class Application(Frame):
     bytesToSend = str.encode(msgFromClient)
     self.udp_socket.sendto(bytesToSend, self.serverAddressPort)
     self.udp_socket.settimeout(2.0)
-
+    g_serverAddressPort = self.serverAddressPort;
+    print(g_serverAddressPort)
     try:
       data, addr = self.udp_socket.recvfrom(1024)
       self.display_message("Connected")
@@ -493,6 +549,7 @@ class Application(Frame):
 
 
   def read_mem(self):
+    global g_serverAddressPort
     lines_num = 16
     start_addr_s = self.rd_addr_ent.get()
     start_addr = int(start_addr_s, 0)
@@ -506,7 +563,7 @@ class Application(Frame):
     self.serv_addr = self.serv_addr_ent.get()
     self.serv_port = self.serv_port_ent.get()
     self.serverAddressPort = (self.serv_addr, int(self.serv_port))
-
+    g_serverAddressPort = self.serverAddressPort;
     self.udp_socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 
     bits = self.bits.get()
