@@ -229,6 +229,17 @@ class State_mach:
       bytesToSend = str.encode(request)
       self.udp_socket.sendto(bytesToSend, g_serverAddressPort)
 
+  def send_event(self, actn, action):
+    print(actn)
+    bytesToSend = str.encode("s" + actn)
+    self.udp_socket.sendto(bytesToSend, g_serverAddressPort)
+
+    self.print_list(action[actn])
+    for act in action[actn]:
+      request = "s " + act
+      bytesToSend = str.encode(request)
+      self.udp_socket.sendto(bytesToSend, g_serverAddressPort)
+
   def state_mach_init(self, filename):
     global g_serverAddressPort
     self.udp_socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
@@ -238,19 +249,43 @@ class State_mach:
 
     states_n = machine['machine']['states_n']
     events_n = machine['machine']['events_n']
+    delay_ms = machine['machine']['delay_ms']
+    delay_us = machine['machine']['delay_us']
+    actions_n = machine['machine']['actions_n'] 
     print(states_n)
     print(events_n)
+    print(delay_ms)
+    print(delay_us)
+    print(actions_n)
+
+    str_param = "s p "
+    str_param += str(states_n)
+    str_param += " "
+    str_param += str(events_n)
+    str_param += " "
+    str_param += str(delay_ms)
+    str_param += " "
+    str_param += str(delay_us)
+    str_param += " "
+    str_param += str(actions_n)
+
+    bytesToSend = str.encode(str_param)
+    self.udp_socket.sendto(bytesToSend, g_serverAddressPort)
 
 
     states = machine['machine']['states']
 
     for i in range(0,int(states_n)):
       print(states[i])
+      bytesToSend = str.encode("s s "+ str(i) + " " + states[i])
+      self.udp_socket.sendto(bytesToSend, g_serverAddressPort)
 
     print("----------------")
     actions = machine['machine']['actions']
     for i in range(0,int(states_n)):
       print(actions[i])
+      bytesToSend = str.encode("s a "+ str(i) + " " + actions[i])
+      self.udp_socket.sendto(bytesToSend, g_serverAddressPort)
 
 
     events = machine['machine']['events']

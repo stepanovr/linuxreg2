@@ -1,8 +1,8 @@
 machine:
   states_n:  12
+  events_n:  11
   delay_ms:  1
   delay_us:  0
-  events_n:  11
   actions_n: 10
   states:  [0   2   7   1  11   3   4   4   7   8   5   7,
             1   2   7   1  11   3   4   4   7   8   5   7,
