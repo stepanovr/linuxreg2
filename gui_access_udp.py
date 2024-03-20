@@ -295,50 +295,10 @@ class State_mach:
 
     action = machine['machine']['action']
 
-#    print(action["a0"])
-#    print(len(action["a0"]))
-
-    self.send_action("a0", action)
-    self.send_action("a1", action)
-    self.send_action("a2", action)
-    self.send_action("a3", action)
-    self.send_action("a4", action)
-    self.send_action("a5", action)
-    self.send_action("a6", action)
-    self.send_action("a7", action)
-    self.send_action("a8", action)
-    self.send_action("a9", action)
-    self.send_action("a10", action)
-    self.send_action("a11", action)
-    self.send_action("a12", action)
-    
-#    self.print_list(action["a0"])
-#    for act in action["a0"]:
-#      request = "s " + act
-#      bytesToSend = str.encode(request)
-#      self.udp_socket.sendto(bytesToSend, g_serverAddressPort)
+    for act_i in range(0, actions_n):
+      param = "a"+ str(act_i)
+      self.send_action(param, action)
       
-#    self.print_list(action["a1"])
-#    for act in action["a1"]:
-#      request = "s " + act
-#      bytesToSend = str.encode(request)
-#      self.udp_socket.sendto(bytesToSend, g_serverAddressPort)
-      
-#    self.print_list(action["a2"])
-#    for act in action["a2"]:
-#      request = "s " + act
-#      bytesToSend = str.encode(request)
-#      self.udp_socket.sendto(bytesToSend, g_serverAddressPort)
-      
-#    self.print_list(action["a20"])
-#    for act in action["a20"]:
-#      request = "s " + act
-#      bytesToSend = str.encode(request)
-#      self.udp_socket.sendto(bytesToSend, g_serverAddressPort)
-      
-
-#    a_string = ' '.join(action["a0"])
-#    print(a_string)
 
 
 
