@@ -9,6 +9,7 @@ build: $(APP)
 
 $(APP): $(APP_OBJS)
 	$(CC) -o $@ $(APP_OBJS) $(LDFLAGS) $(LDLIBS)
+	mv udpserv udpserv32
 clean:
 	rm -f $(APP) *.o
 
