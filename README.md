@@ -72,3 +72,58 @@ with the address indicated with the "addr" field.
 Try oppening the registers.xml file with the application's File->Regs XML.
 That will open the window that is specified with the registers.xml.
 
+### Install on Yocto
+
+devtool add regview https://github.com/stepanovr/linuxreg2
+
+Replace the recipe
+build/workspace/recipes/regview/regview_git.bb
+with:
+```
+# Recipe created by recipetool
+# This is the basis of a recipe and may need further editing in order to be fully functional.
+# (Feel free to remove these comments when editing.)
+
+# WARNING: the following LICENSE and LIC_FILES_CHKSUM values are best guesses - it is
+# your responsibility to verify that the values are complete and correct.
+LICENSE = "GPL-2.0-only"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+
+SRC_URI = "git://github.com/stepanovr/linuxreg2;protocol=https;branch=master"
+
+# Modify these as desired
+PV = "1.0+git"
+SRCREV = "346be6905e39d77ddd8024ea4bcbda0c0f9f58c9"
+
+S = "${WORKDIR}/git"
+
+
+# NOTE: this is a Makefile-only piece of software, so we cannot generate much of the
+# recipe automatically - you will need to examine the Makefile yourself and ensure
+# that the appropriate arguments are passed in.
+
+do_configure () {
+        # Specify any needed configure commands here
+        :
+}
+
+do_compile () {
+        # You will almost certainly need to add additional arguments here
+        oe_runmake
+}
+
+do_install () {
+        # NOTE: unable to determine what to put here - there is a Makefile but no
+        # target named "install", so you will need to define this yourself
+        install -d ${D}${bindir}
+        install -m 0755 ${S}/target/arch_32/udpserv32 ${D}${bindir}/udpserv32
+        install -m 0755 ${S}/target/arch_64/udpserv64 ${D}${bindir}/udpserv64
+}
+```
+
+add to build/conf/local.conf
+
+```
+IMAGE_INSTALL:append = " regview"
+```
+
