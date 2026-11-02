@@ -8,13 +8,13 @@ PIPE_UP=${PIPE_NAME}_up
 
 FIFO_LOCATION=/tmp
 
-WORK_DIR=`pwd`
+WORK_DIR="$(dirname "$(readlink -f "$0")")"
 
 
-killall udpserv
+killall udpserv64
 
 
-${WORK_DIR}/udpserv $PORT ${FIFO_LOCATION}/$PIPE_DOWN ${FIFO_LOCATION}/$PIPE_UP &
+${WORK_DIR}/udpserv64 $PORT ${FIFO_LOCATION}/$PIPE_DOWN ${FIFO_LOCATION}/$PIPE_UP &
 exit 0
 
 while [ true ]
