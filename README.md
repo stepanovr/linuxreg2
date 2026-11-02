@@ -12,7 +12,7 @@ Use the application on your own risk.
 The application consists of two parts:
 The first one is a simple udp server to run on the target machine. The UDP server receives command from 
 the remote GUI application, execute them and responds to the remote GUI application.
-There are two versions of the server in the target directory: target/arch_32 and target/arch_64.
+There are two versions of the server in the target directory: target/32 and target/64.
 
 The second part is a Python scripts that uses tkinter for GUI.
 
@@ -34,16 +34,17 @@ For writing use 32 bit words only.
 
 
 Installing the target udp server on the 32 bit architecture:
-Copy files in target/arch_32 to a target machine.
+Copy files in target/32 to a target machine.
 Execute  make
 
 Installing the target udp server on the 64 bit architecture:
-Copy files in target/arch_64 to a target machine.
+Copy files in target/64 to a target machine.
 Execute  make
 
 
 Then execute the script as superuser:
-sudo ./mem_access.sh
+sudo ./mem_access32.sh   (32 bit)
+sudo ./mem_access64.sh   (64 bit)
 
 
 On a remote machine run the Python application gui_access_udp.py
@@ -117,7 +118,9 @@ do_install () {
         # target named "install", so you will need to define this yourself
         install -d ${D}${bindir}
         install -m 0755 ${S}/target/arch_32/udpserv32 ${D}${bindir}/udpserv32
+        install -m 0755 ${S}/target/arch_32/mem_access32.sh ${D}${bindir}/mem_access32.sh
         install -m 0755 ${S}/target/arch_64/udpserv64 ${D}${bindir}/udpserv64
+        install -m 0755 ${S}/target/arch_64/mem_access64.sh ${D}${bindir}/mem_access64.sh
 }
 ```
 

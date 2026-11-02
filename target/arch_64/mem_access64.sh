@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+PORT=35035
+
+PIPE_NAME=pipe
+PIPE_DOWN=${PIPE_NAME}_down
+PIPE_UP=${PIPE_NAME}_up
+
+FIFO_LOCATION=/tmp
+
+WORK_DIR="$(dirname "$(readlink -f "$0")")"
+
+
+killall udpserv64
+
+
+${WORK_DIR}/udpserv64 $PORT ${FIFO_LOCATION}/$PIPE_DOWN ${FIFO_LOCATION}/$PIPE_UP &
+exit 0
+
+while [ true ]
+do
+  MESSAGE=`cat ${FIFO_LOCATION}/$PIPE_DOWN`
+  MESSAGE1=`$WORK_DIR/devmem $MESSAGE`
+
+echo "$MESSAGE1" 
+echo " ${FIFO_LOCATION}/$PIPE_UP"
+
+  echo "$MESSAGE1" > ${FIFO_LOCATION}/$PIPE_UP
+
+echo "$MESSAGE $MESSAGE1"
+
+done
+
+

@@ -1,4 +1,4 @@
-APP = udpserv
+APP = udpserv64
 
 # Add any other object files to this list below
 APP_OBJS = udpserv.o memaccess.o
@@ -9,7 +9,6 @@ build: $(APP)
 
 $(APP): $(APP_OBJS)
 	$(CC) -o $@ $(APP_OBJS) $(LDFLAGS) $(LDLIBS)
-	mv udpserv udpserv64
+
 clean:
 	rm -f $(APP) *.o
-
