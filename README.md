@@ -94,7 +94,7 @@ SRC_URI = "git://github.com/stepanovr/linuxreg2;protocol=https;branch=master"
 
 # Modify these as desired
 PV = "1.0+git"
-SRCREV = "4e10dd7b48928aa478f5a34752fb27c3d4051174"
+SRCREV = "b73002ecd24b3b305bb27ac237b87a3070633952"
 
 S = "${WORKDIR}/git"
 
